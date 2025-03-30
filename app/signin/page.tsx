@@ -1,8 +1,8 @@
-'use client';  // Add this line to mark this file as a Client Component
+'use client';  // Mark this file as a Client Component
 
-import { redirect } from "next/navigation"; // `next/navigation` comes first
-import { useEffect, useState } from "react"; // `react` is second
-import { getProviders, useSession } from "next-auth/react"; // Import only useSession from next-auth/react
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getProviders, useSession } from "next-auth/react";
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
@@ -11,7 +11,7 @@ import styles from "./signin.module.css";
 const SignIn = () => {
   const [email, setEmail] = useState(""); // Manage email state
   const [session, setSession] = useState<null | object>(null); // Keep track of session state
-  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Providers state
+  const [providers, setProviders] = useState<Record<string, string> | null>(null); // Providers state can be null initially
 
   // Use useSession hook from next-auth/react to get session data
   const { data: sessionData } = useSession();
@@ -32,7 +32,9 @@ const SignIn = () => {
   useEffect(() => {
     const getAuthProviders = async () => {
       const providers = await getProviders();
-      setProviders(providers);
+      if (providers) {
+        setProviders(providers); // Set providers only if they are not null
+      }
     };
 
     getAuthProviders();
@@ -41,7 +43,7 @@ const SignIn = () => {
   return (
     <div className={styles.container}>
       <h1>Sign In</h1>
-      
+
       {/* Render Demo Login or NextAuth Login based on available providers */}
       {providers ? (
         <NextAuthLogin providers={providers} />
