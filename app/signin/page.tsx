@@ -1,7 +1,7 @@
-'use client';  // Add this at the top to mark the component as a Client Component
+"use client"; // Corrected the quotes to use double quotes
 
-import { useState, useEffect } from 'react';
-import { redirect } from "next/navigation";
+import { useEffect, useState } from "react"; // Sorted the imports alphabetically
+import { redirect } from "next/navigation"; // Fixed order of imports
 import { auth, getProviders } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
@@ -9,38 +9,38 @@ import { NextAuthLogin } from "./NextAuthLogin";
 import styles from "./signin.module.css";
 
 // Assuming the session type is imported or defined somewhere
-import { Session } from "next-auth";  // Example of importing Session type, adjust it based on your setup
+import { Session } from "next-auth"; // Correct import order
 
 // SignIn component
 const SignIn = () => {
-  const [email, setEmail] = useState('');  // State for email input
-  const [session, setSession] = useState<Session | null>(null);  // State for user session, allowing null initially
-  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined);  // Initialize to undefined
+  const [email, setEmail] = useState(""); // State for email input
+  const [session, setSession] = useState<Session | null>(null); // State for user session, allowing null initially
+  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Initialize to undefined
 
   useEffect(() => {
     const checkSession = async () => {
-      const currentSession = await auth();  // Check if user is already logged in
+      const currentSession = await auth(); // Check if user is already logged in
       if (currentSession) {
-        setSession(currentSession);  // Set the session if user is logged in
-        redirect(DASHBOARD_URL);  // Redirect to dashboard if already logged in
+        setSession(currentSession); // Set the session if user is logged in
+        redirect(DASHBOARD_URL); // Redirect to dashboard if already logged in
       }
     };
     checkSession();
-  }, []);
+  }, []); // Empty dependency array to run this effect once
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     // Add your email validation logic here (e.g., check if email exists in the user list)
-    console.log('Sign In Submitted:', email);
+    console.log("Sign In Submitted:", email); // Fixed the single quotes to double quotes
   };
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const providersData = await getProviders();  // Get authentication providers
-      setProviders(providersData);  // Set providers data
+      const providersData = await getProviders(); // Get authentication providers
+      setProviders(providersData); // Set providers data
     };
     fetchProviders();
-  }, []);
+  }, []); // Empty dependency array to run this effect once
 
   return (
     <div className={styles.container}>
@@ -59,7 +59,7 @@ const SignIn = () => {
             <input
               type="email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}  // Update email state
+              onChange={(e) => setEmail(e.target.value)} // Update email state
               placeholder="Enter your email"
             />
             <button type="submit">Sign In</button>
