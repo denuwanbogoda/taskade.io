@@ -5,7 +5,7 @@ import { auth, signIn } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { SignInIcon } from "@/icons";
 import { MarketingLayout } from "@/layouts/Marketing";
-import { Button } from "@/primitives/Button";
+import { Button, LinkButton } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 
@@ -35,8 +35,12 @@ export default async function Index() {
     <MarketingLayout>
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
-          <h1 className={styles.heroTitle}>Welcome to Taskade</h1>
-        
+          <h1 className={styles.heroTitle}>
+            Welcome To&nbsp;Taskade
+          </h1>
+          <p className={styles.heroLead}>
+             The ultimate collaboration app for teams and individuals.
+          </p>
         </div>
         <div className={styles.heroActions}>
           <form
@@ -47,7 +51,14 @@ export default async function Index() {
           >
             <Button icon={<SignInIcon />}>Sign in</Button>
           </form>
-        </div>
+          <LinkButton
+            href="https://nexios.vercel.app"
+            target="_blank"
+            variant="secondary"
+          >
+            Nexios Ai
+          </LinkButton>
+                  </div>
       </Container>
       <Container className={styles.section}>
         <h2 className={styles.sectionTitle}>Features</h2>
