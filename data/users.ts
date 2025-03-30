@@ -1,15 +1,7 @@
-import { useState } from "react";
-import { LiveblocksProvider, usePresence } from "@liveblocks/client";
-import { liveblocksClient } from "./liveblocks"; // Assuming your liveblocks.ts file is in the root
+// pages/index.tsx (or wherever you want to place it)
+import React, { useState } from "react";
 
-type User = {
-  id: string;
-  name: string;
-  avatar: string;
-  groupIds: string[];
-};
-
-const users: Omit<User, "color">[] = [
+const users = [
   {
     id: "charlie.layne@example.com",
     name: "Charlie Layne",
@@ -42,13 +34,10 @@ const users: Omit<User, "color">[] = [
   },
 ];
 
-const SignIn = () => {
+const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-
-  // Real-time presence for Liveblocks
-  const presence = usePresence();
 
   const handleSignIn = () => {
     // Check if the user already exists
@@ -58,7 +47,7 @@ const SignIn = () => {
       setMessage("User already exists.");
     } else {
       // Add the new user to the list
-      const newUser: Omit<User, "color"> = {
+      const newUser = {
         id: email,
         name: name,
         avatar: "https://liveblocks.io/avatars/avatar-0.png", // Static avatar for now
@@ -68,9 +57,6 @@ const SignIn = () => {
       setMessage(`Welcome, ${name}! Your account has been created.`);
       setEmail(""); // Clear inputs
       setName("");
-
-      // Optionally, push user to Liveblocks presence
-      presence.update({ userId: email, userName: name });
     }
   };
 
@@ -99,22 +85,4 @@ const SignIn = () => {
   );
 };
 
-const App = () => {
-  return (
-    <LiveblocksProvider client={liveblocksClient}>
-      <SignIn />
-      <div>
-        <h3>Users List:</h3>
-        <ul>
-          {users.map((user, index) => (
-            <li key={index}>
-              {user.name} ({user.id})
-            </li>
-          ))}
-        </ul>
-      </div>
-    </LiveblocksProvider>
-  );
-};
-
-export default App;
+export default SignInPage;
