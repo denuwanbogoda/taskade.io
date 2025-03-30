@@ -8,16 +8,19 @@ import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
 import styles from "./signin.module.css";
 
+// Assuming the session type is imported or defined somewhere
+import { Session } from "next-auth";  // Example of importing Session type, adjust it based on your setup
+
 // SignIn component
 const SignIn = () => {
   const [email, setEmail] = useState('');  // State for email input
-  const [session, setSession] = useState(null);  // State for user session
+  const [session, setSession] = useState<Session | null>(null);  // State for user session, allowing null initially
 
   useEffect(() => {
     const checkSession = async () => {
       const currentSession = await auth();  // Check if user is already logged in
       if (currentSession) {
-        setSession(currentSession);
+        setSession(currentSession);  // Set the session if user is logged in
         redirect(DASHBOARD_URL);  // Redirect to dashboard if already logged in
       }
     };
