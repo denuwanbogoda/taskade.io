@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"; // `next/navigation` comes first
 import { useEffect, useState } from "react"; // `react` is second
-import { auth, getProviders, Session } from "next-auth"; // Import Session from next-auth
+import { getProviders, Session, useSession } from "next-auth/react"; // Import from next-auth/react
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
@@ -13,16 +13,15 @@ const SignIn = () => {
   const [session, setSession] = useState<Session | null>(null); // Keep track of session state
   const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Providers state
 
+  // Use `useSession` hook from next-auth/react
+  const { data: sessionData } = useSession();
+
   useEffect(() => {
-    const checkSession = async () => {
-      const currentSession = await auth(); // Check if session exists
-      if (currentSession) {
-        setSession(currentSession); // Set session state
-        redirect(DASHBOARD_URL); // Redirect if session exists
-      }
-    };
-    checkSession();
-  }, []); // Only runs once when component mounts
+    if (sessionData) {
+      setSession(sessionData); // Set session state
+      redirect(DASHBOARD_URL); // Redirect if session exists
+    }
+  }, [sessionData]); // Dependency on sessionData
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
