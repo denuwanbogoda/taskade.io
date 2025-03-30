@@ -1,3 +1,5 @@
+'use client';  // Add this line to mark this file as a Client Component
+
 import { redirect } from "next/navigation"; // `next/navigation` comes first
 import { useEffect, useState } from "react"; // `react` is second
 import { getProviders, useSession } from "next-auth/react"; // Import only useSession from next-auth/react
