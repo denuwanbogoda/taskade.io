@@ -1,4 +1,5 @@
 "use client"; // Corrected quotes
+
 import { redirect } from "next/navigation"; // `next/navigation` first
 import { useEffect, useState } from "react"; // `react` comes second
 import { auth, getProviders } from "@/auth"; // `next-auth` before `react`
@@ -6,12 +7,15 @@ import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
 import styles from "./signin.module.css";
+
 // Make sure `session` is being used or removed if unnecessary
 import { Session } from "next-auth"; 
+
 const SignIn = () => {
   const [email, setEmail] = useState(""); // State for email
   const [session, setSession] = useState<Session | null>(null); // If you plan to use session, leave it here
   const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Adjusted type
+
   useEffect(() => {
     const checkSession = async () => {
       const currentSession = await auth(); // Check user session
@@ -22,10 +26,12 @@ const SignIn = () => {
     };
     checkSession();
   }, []); 
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Sign In Submitted:", email);
   };
+
   useEffect(() => {
     const fetchProviders = async () => {
       const providersData = await getProviders();
@@ -33,6 +39,7 @@ const SignIn = () => {
     };
     fetchProviders();
   }, []); 
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
@@ -59,4 +66,5 @@ const SignIn = () => {
     </div>
   );
 };
+
 export default SignIn;
