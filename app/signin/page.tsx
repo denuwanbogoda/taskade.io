@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"; // `next/navigation` comes first
 import { useEffect, useState } from "react"; // `react` is second
-import { getProviders, Session, useSession } from "next-auth/react"; // Import from next-auth/react
+import { getProviders, useSession } from "next-auth/react"; // Import only useSession from next-auth/react
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
