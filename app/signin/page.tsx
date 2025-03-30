@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { useEffect, useState } from "react";
-import { getProviders, useSession } from "next-auth/react";
+import { getProviders, useSession, ClientSafeProvider } from "next-auth/react"; // Import ClientSafeProvider type
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
@@ -11,7 +11,7 @@ import styles from "./signin.module.css";
 const SignIn = () => {
   const [email, setEmail] = useState(""); // Manage email state
   const [session, setSession] = useState<null | object>(null); // Keep track of session state
-  const [providers, setProviders] = useState<Record<string, string> | null>(null); // Providers state can be null initially
+  const [providers, setProviders] = useState<Record<string, ClientSafeProvider> | null>(null); // Update type to ClientSafeProvider
 
   // Use useSession hook from next-auth/react to get session data
   const { data: sessionData } = useSession();
