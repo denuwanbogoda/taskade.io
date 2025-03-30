@@ -1,31 +1,28 @@
-"use client"; // Corrected quotes
+"use client";
 
-import { redirect } from "next/navigation"; // `next/navigation` first
-import { useEffect, useState } from "react"; // `react` comes second
-import { auth, getProviders } from "@/auth"; // `next-auth` before `react`
-import { DASHBOARD_URL } from "@/constants"; 
+import { redirect } from "next/navigation"; // `next/navigation` comes first
+import { useEffect, useState } from "react"; // `react` is second
+import { auth, getProviders } from "@/auth"; // `next-auth` should come before `react`
+import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
 import styles from "./signin.module.css";
 
-// Make sure `session` is being used or removed if unnecessary
-import { Session } from "next-auth"; 
-
 const SignIn = () => {
-  const [email, setEmail] = useState(""); // State for email
-  const [session, setSession] = useState<Session | null>(null); // If you plan to use session, leave it here
-  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Adjusted type
+  const [email, setEmail] = useState(""); // Manage email state
+  const [session, setSession] = useState<Session | null>(null); // Keep track of session state
+  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Providers state
 
   useEffect(() => {
     const checkSession = async () => {
-      const currentSession = await auth(); // Check user session
+      const currentSession = await auth(); // Check if session exists
       if (currentSession) {
-        setSession(currentSession); // Set session
-        redirect(DASHBOARD_URL); // Redirect if logged in
+        setSession(currentSession); // Set session state
+        redirect(DASHBOARD_URL); // Redirect if session exists
       }
     };
     checkSession();
-  }, []); 
+  }, []); // Only runs once when component mounts
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,11 +31,11 @@ const SignIn = () => {
 
   useEffect(() => {
     const fetchProviders = async () => {
-      const providersData = await getProviders();
-      setProviders(providersData); 
+      const providersData = await getProviders(); // Get providers data
+      setProviders(providersData); // Set providers
     };
     fetchProviders();
-  }, []); 
+  }, []); // Runs once on component mount
 
   return (
     <div className={styles.container}>
