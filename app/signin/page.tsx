@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation"; // `next/navigation` comes first
 import { useEffect, useState } from "react"; // `react` is second
-import { auth, getProviders } from "@/auth"; // `next-auth` should come before `react`
+import { auth, getProviders, Session } from "next-auth"; // Import Session from next-auth
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
 import { NextAuthLogin } from "./NextAuthLogin";
