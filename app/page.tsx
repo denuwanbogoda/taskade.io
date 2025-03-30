@@ -36,10 +36,7 @@ export default async function Index() {
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
           <h1 className={styles.heroTitle}>Welcome to Taskade</h1>
-         <p className={styles.heroLead}>
-  The ultimate collaboration app for teams and individuals.
-</p>
-
+        
         </div>
         <div className={styles.heroActions}>
           <form
