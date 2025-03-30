@@ -39,7 +39,7 @@ export default async function Index() {
             Kickstart your collaborative&nbsp;app
           </h1>
           <p className={styles.heroLead}>
-            Use the Liveblocks Starter Kit to build your document-based
+            Use the Taskade Starter Kit to build your document-based
             collaborative app in&nbsp;minutes.
           </p>
         </div>
