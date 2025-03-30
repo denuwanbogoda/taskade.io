@@ -1,7 +1,7 @@
 "use client"; // Corrected the quotes to use double quotes
 
-import { useEffect, useState } from "react"; // Sorted the imports alphabetically
-import { redirect } from "next/navigation"; // Fixed order of imports
+import { redirect } from "next/navigation"; // `next/navigation` should be first
+import { useEffect, useState } from "react"; // `react` comes after `next/navigation`
 import { auth, getProviders } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { DemoLogin } from "./DemoLogin";
@@ -9,7 +9,7 @@ import { NextAuthLogin } from "./NextAuthLogin";
 import styles from "./signin.module.css";
 
 // Assuming the session type is imported or defined somewhere
-import { Session } from "next-auth"; // Correct import order
+import { Session } from "next-auth"; // `next-auth` comes before `react`
 
 // SignIn component
 const SignIn = () => {
