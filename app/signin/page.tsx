@@ -1,3 +1,5 @@
+'use client';  // Add this at the top to mark the component as a Client Component
+
 import { useState, useEffect } from 'react';
 import { redirect } from "next/navigation";
 import { auth, getProviders } from "@/auth";
