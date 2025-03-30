@@ -15,7 +15,7 @@ import { Session } from "next-auth";  // Example of importing Session type, adju
 const SignIn = () => {
   const [email, setEmail] = useState('');  // State for email input
   const [session, setSession] = useState<Session | null>(null);  // State for user session, allowing null initially
-  const [providers, setProviders] = useState<Record<string, string> | null>(null);  // State for providers, allowing null initially
+  const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined);  // Initialize to undefined
 
   useEffect(() => {
     const checkSession = async () => {
