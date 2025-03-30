@@ -36,11 +36,10 @@ export default async function Index() {
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
           <h1 className={styles.heroTitle}>
-            Kickstart your collaborative&nbsp;app
+            Welcome to Taskade
           </h1>
           <p className={styles.heroLead}>
-            Use the Taskade Starter Kit to build your document-based
-            collaborative app in&nbsp;minutes.
+            The ultimate collaboration app for teams and individuals.
           </p>
         </div>
         <div className={styles.heroActions}>
@@ -52,13 +51,6 @@ export default async function Index() {
           >
             <Button icon={<SignInIcon />}>Sign in</Button>
           </form>
-          <LinkButton
-            href="https://liveblocks.io/docs/guides/nextjs-starter-kit"
-            target="_blank"
-            variant="secondary"
-          >
-            Learn more
-          </LinkButton>
         </div>
       </Container>
       <Container className={styles.section}>
@@ -67,55 +59,42 @@ export default async function Index() {
           <Feature
             description={
               <>
-                A collaborative whiteboard app with included share menu,
-                documents listing, users, groups, permissions, and more.
+                A powerful workspace for real-time collaboration and task management.
               </>
             }
-            title="Liveblocks"
+            title="Real-time Collaboration"
           />
           <Feature
             description={
               <>
-                Best practices followed, using a mixture of SSR and custom API
-                endpoints. Modify documents from both client and server.
+                Organize your work efficiently with our intuitive project management tools.
               </>
             }
-            title="Next.js"
+            title="Project Management"
           />
           <Feature
             description={
               <>
-                Adjust our reusable interface & design system to fit your needs.
+                Customize your workspace to fit your team's unique workflow.
               </>
             }
-            title="User Interface"
+            title="Customizable Workflows"
           />
           <Feature
             description={
               <>
-                All custom client and server functions are fully typed, and easy
-                to update.
+                Secure authentication with support for multiple providers.
               </>
             }
-            title="TypeScript"
+            title="Secure Authentication"
           />
           <Feature
             description={
               <>
-                Complete authentication, compatible with any NextAuth provider,
-                including GitHub, Google, Auth0, and many more.
+                Stay updated with real-time notifications and seamless updates.
               </>
             }
-            title="NextAuth.js"
-          />
-          <Feature
-            description={
-              <>
-                See data update live using the SWR (state-while-revalidate)
-                library.
-              </>
-            }
-            title="SWR"
+            title="Instant Notifications"
           />
         </div>
       </Container>
