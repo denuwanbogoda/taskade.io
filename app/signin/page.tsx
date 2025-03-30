@@ -1,5 +1,3 @@
-"use client";
-
 import { redirect } from "next/navigation"; // `next/navigation` comes first
 import { useEffect, useState } from "react"; // `react` is second
 import { getProviders, useSession } from "next-auth/react"; // Import only useSession from next-auth/react
@@ -10,55 +8,63 @@ import styles from "./signin.module.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState(""); // Manage email state
-  const [session, setSession] = useState<Session | null>(null); // Keep track of session state
+  const [session, setSession] = useState<null | object>(null); // Keep track of session state
   const [providers, setProviders] = useState<Record<string, string> | undefined>(undefined); // Providers state
 
-  // Use `useSession` hook from next-auth/react
+  // Use useSession hook from next-auth/react to get session data
   const { data: sessionData } = useSession();
 
+  // Effect hook to update session state when session data changes
   useEffect(() => {
     if (sessionData) {
-      setSession(sessionData); // Set session state
-      redirect(DASHBOARD_URL); // Redirect if session exists
+      setSession(sessionData); // Set session data when available
     }
-  }, [sessionData]); // Dependency on sessionData
+  }, [sessionData]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Sign In Submitted:", email);
-  };
+  // If the user is already logged in, redirect to the dashboard
+  if (sessionData) {
+    redirect(DASHBOARD_URL);
+  }
 
+  // Fetch the authentication providers
   useEffect(() => {
-    const fetchProviders = async () => {
-      const providersData = await getProviders(); // Get providers data
-      setProviders(providersData); // Set providers
+    const getAuthProviders = async () => {
+      const providers = await getProviders();
+      setProviders(providers);
     };
-    fetchProviders();
-  }, []); // Runs once on component mount
+
+    getAuthProviders();
+  }, []);
 
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
-        <h2 className={styles.title}>Sign in to your account</h2>
-        {providers && providers.credentials ? (
-          <DemoLogin />
-        ) : (
-          <NextAuthLogin providers={providers} />
-        )}
-        <div style={{ margin: "20px" }}>
-          <h2>Or Sign In with your email</h2>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-            />
-            <button type="submit">Sign In</button>
-          </form>
+      <h1>Sign In</h1>
+      
+      {/* Render Demo Login or NextAuth Login based on available providers */}
+      {providers ? (
+        <NextAuthLogin providers={providers} />
+      ) : (
+        <DemoLogin />
+      )}
+
+      {/* Form to capture email */}
+      <form className={styles.form}>
+        <input
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button type="submit">Sign In</button>
+      </form>
+
+      {/* Show session details if logged in */}
+      {session && (
+        <div>
+          <h3>Welcome back!</h3>
+          <p>{JSON.stringify(session)}</p>
         </div>
-      </main>
-      <aside className={styles.aside} />
+      )}
     </div>
   );
 };
