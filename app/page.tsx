@@ -5,7 +5,7 @@ import { auth, signIn } from "@/auth";
 import { DASHBOARD_URL } from "@/constants";
 import { SignInIcon } from "@/icons";
 import { MarketingLayout } from "@/layouts/Marketing";
-import { Button, LinkButton } from "@/primitives/Button";
+import { Button } from "@/primitives/Button";
 import { Container } from "@/primitives/Container";
 import styles from "./page.module.css";
 
@@ -35,12 +35,8 @@ export default async function Index() {
     <MarketingLayout>
       <Container className={styles.section}>
         <div className={styles.heroInfo}>
-          <h1 className={styles.heroTitle}>
-            Welcome to Taskade
-          </h1>
-          <p className={styles.heroLead}>
-            The ultimate collaboration app for teams and individuals.
-          </p>
+          <h1 className={styles.heroTitle}>Welcome to Taskade</h1>
+          <p className={styles.heroLead}>The ultimate collaboration app for teams and individuals.</p>
         </div>
         <div className={styles.heroActions}>
           <form
@@ -57,43 +53,23 @@ export default async function Index() {
         <h2 className={styles.sectionTitle}>Features</h2>
         <div className={styles.featuresGrid}>
           <Feature
-            description={
-              <>
-                A powerful workspace for real-time collaboration and task management.
-              </>
-            }
+            description="A powerful workspace for real-time collaboration and task management."
             title="Real-time Collaboration"
           />
           <Feature
-            description={
-              <>
-                Organize your work efficiently with our intuitive project management tools.
-              </>
-            }
+            description="Organize your work efficiently with our intuitive project management tools."
             title="Project Management"
           />
           <Feature
-            description={
-              <>
-                Customize your workspace to fit your team's unique workflow.
-              </>
-            }
+            description="Customize your workspace to fit your team's unique workflow."
             title="Customizable Workflows"
           />
           <Feature
-            description={
-              <>
-                Secure authentication with support for multiple providers.
-              </>
-            }
+            description="Secure authentication with support for multiple providers."
             title="Secure Authentication"
           />
           <Feature
-            description={
-              <>
-                Stay updated with real-time notifications and seamless updates.
-              </>
-            }
+            description="Stay updated with real-time notifications and seamless updates."
             title="Instant Notifications"
           />
         </div>
